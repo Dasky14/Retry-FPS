@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5400000}
   - component: {fileID: 8200000}
   - component: {fileID: 114006845852657170}
-  m_Layer: 0
+  - component: {fileID: 114247744862322116}
+  m_Layer: 2
   m_Name: FPSController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +32,7 @@ GameObject:
   - component: {fileID: 2000000}
   - component: {fileID: 8100000}
   - component: {fileID: 12474086}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -386,7 +387,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 100
-  explosionEffect: {fileID: 198000012777718758, guid: acf39d9f4addf294d93fa56fa373961b,
+  explosionEffect: {fileID: 198000012942003240, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 2}
   radius: 5
   explosionForce: 700
+--- !u!114 &114247744862322116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddc529ed60da664eacada7e82edf7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewindCount: 0
+  isRewinding: 0
+  cameraList: []

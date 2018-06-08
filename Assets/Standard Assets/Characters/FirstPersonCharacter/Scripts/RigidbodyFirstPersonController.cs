@@ -134,11 +134,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jump = true;
             }
-        }
 
-
-        private void FixedUpdate()
-        {
             GroundCheck();
             Vector2 input = GetInput();
 
@@ -185,7 +181,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             m_Jump = false;
         }
-
 
         private float SlopeMultiplier()
         {
