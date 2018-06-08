@@ -1,30 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.Characters.FirstPerson;
 
+[RequireComponent(typeof(Rigidbody))]
 public class TimeObjectPlayer : TimeObject {
 
 	[HideInInspector]
 	public List<Quaternion> cameraList;
 	private Rigidbody rb;
 	private Camera cam;
-	private FirstPersonController fpsScript;
+	private PlayerController pc;
 
 	void Start () {
 		rb = transform.GetComponent<Rigidbody>();
+		pc = GetComponent<PlayerController>();
 		cam = transform.GetComponentInChildren<Camera>();
-		fpsScript = transform.GetComponent<FirstPersonController>();
 	}
 
 	public override void StartRewind () {
 		isRewinding = true;
-		fpsScript.enabled = false;
+		ControlsEnabled(false);
 	}
 
 	public override void StopRewind () {
 		isRewinding = false;
-		fpsScript.enabled = true;
+		ControlsEnabled(true);
 	}
 
 	public override void Rewind () {
@@ -39,7 +39,6 @@ public class TimeObjectPlayer : TimeObject {
 			cameraList.RemoveAt(0);
 		}
 		if (cameraList.Count <= 0 && timeInstanceList.Count <= 0) {
-			fpsScript.m_MouseLook.Init(transform, cam.transform);
 			StopRewind();
 		}
 	}
@@ -54,4 +53,8 @@ public class TimeObjectPlayer : TimeObject {
 		cameraList.Insert(0, cam.transform.rotation);
 	}
 
+	void ControlsEnabled (bool _enabled) {
+		if (pc != null)
+			pc.enabled = _enabled;
+	}
 }
