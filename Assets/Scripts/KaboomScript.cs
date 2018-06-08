@@ -9,7 +9,7 @@ public class KaboomScript : MonoBehaviour {
 	[Header("Kaboom parameters")]
 	public float range = 100f;
 	public ParticleSystem explosionEffect;
-	public float radius = 5f;
+	public float radius = 10f;
 	public float explosionForce = 700f;
 
 	// Use this for initialization
