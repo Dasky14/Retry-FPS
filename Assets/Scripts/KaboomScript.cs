@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class KaboomScript : MonoBehaviour {
 
-	private Camera cam;
-
 	[Header("Kaboom parameters")]
 	public float range = 100f;
 	public ParticleSystem explosionEffect;
 	public float radius = 10f;
 	public float explosionForce = 700f;
+	[Range(1f/6f, 5f)]
+	public float fireCooldown;
+
+	[Header("Gun reference")]
+	public GameObject gun;
+	
+	private Camera cam;
+	private Animator gunAnime;
+	private float fireTime;
 
 	// Use this for initialization
 	void Start () {
 		cam = transform.GetComponentInChildren<Camera>();
+		gunAnime = gun.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -24,14 +32,17 @@ public class KaboomScript : MonoBehaviour {
 			return;
 		}
 		
-		if (Input.GetButtonDown("Fire1")) {
+		if (Input.GetButtonDown("Fire1") && Time.time >= (fireTime + fireCooldown)) {
 			Fire();
+			fireTime = Time.time;
 		}
 	}
 
 	void Fire () {
 		RaycastHit hit;
 		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)) {
+			StartCoroutine(PlayOneShot("isFiring"));
+
 			if (explosionEffect != null) {
 				ParticleSystem effect = Instantiate(explosionEffect, hit.point, Quaternion.identity);
 				Destroy(effect.gameObject, 5f);
@@ -49,4 +60,11 @@ public class KaboomScript : MonoBehaviour {
 			}
 		}
 	}
+
+	public IEnumerator PlayOneShot ( string _paramName )
+    {
+        gunAnime.SetBool( _paramName, true );
+        yield return null;
+        gunAnime.SetBool( _paramName, false );
+    }
 }

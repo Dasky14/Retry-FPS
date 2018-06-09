@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 6;
 	public float horizSensitivity = 1;
 	public float vertSensitivity = 1;
+	public float fallMult = 2f;
+	public float lowJumpMult = 1f;
+	public float jumpForce = 8f;
 
 	void Start () {
 		motor = GetComponent<PlayerMotor>();
@@ -23,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 		Vector3 movVertical = transform.forward * Input.GetAxisRaw("Vertical");
 
 		Vector3 velocity = (movHorizontal + movVertical).normalized * speed;
-
 		motor.Move(velocity);
 
 		//Player horizontal aiming
@@ -33,5 +35,9 @@ public class PlayerController : MonoBehaviour {
 		//Player vertical aiming
 		Vector3 rotationY = new Vector3(Input.GetAxisRaw("Mouse Y"), 0f, 0f) * vertSensitivity;
 		motor.RotateY(rotationY);
+
+		//Player jumping
+		if (Input.GetButtonDown("Jump"))
+			motor.Jump(jumpForce, fallMult, lowJumpMult);
 	}
 }

@@ -12,6 +12,9 @@ public class PlayerMotor : MonoBehaviour {
 	private Vector3 rotationY;
 	private float minimumX = -90f;
 	private float maximumX = 90f;
+	private float fallMult;
+	private float lowJumpMult;
+	private string jumpButton;
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +27,17 @@ public class PlayerMotor : MonoBehaviour {
 		ApplyMovement();
 		ApplyRotationX();
 		ApplyRotationY();
+		
+		if (rb.velocity.y < 0)
+			rb.velocity += Vector3.up * Physics.gravity.y * fallMult * Time.deltaTime;
+		else if (rb.velocity.y >= 0 && !Input.GetButton("Jump")) 
+			rb.velocity += Vector3.up * Physics.gravity.y * lowJumpMult * Time.deltaTime;
 	}
 
 	void ApplyMovement () {
-		if (velocity != Vector3.zero)
+		if (velocity != Vector3.zero) {
 			rb.MovePosition(rb.position + velocity * Time.deltaTime);
+		}
 	}
 
 	void ApplyRotationX () {
@@ -54,6 +63,13 @@ public class PlayerMotor : MonoBehaviour {
 
 	public void RotateY (Vector3 _rotation) {
 		rotationY = -_rotation;
+	}
+
+	public void Jump (float _jumpForce, float _fallMult, float _lowJumpMult) {
+		rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+
+		fallMult = _fallMult;
+		lowJumpMult = _lowJumpMult;
 	}
 
 	Quaternion ClampRotationAroundXAxis(Quaternion q)

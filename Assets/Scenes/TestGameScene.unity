@@ -537,6 +537,9 @@ MonoBehaviour:
   speed: 9.3
   horizSensitivity: 1
   vertSensitivity: 1
+  fallMult: 2
+  lowJumpMult: 1.5
+  jumpForce: 6
 --- !u!114 &191935048
 MonoBehaviour:
   m_ObjectHideFlags: 0
