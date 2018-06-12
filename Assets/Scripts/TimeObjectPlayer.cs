@@ -38,9 +38,6 @@ public class TimeObjectPlayer : TimeObject {
 			cam.transform.rotation = cameraList[0];
 			cameraList.RemoveAt(0);
 		}
-		if (cameraList.Count <= 0 && timeInstanceList.Count <= 0) {
-			StopRewind();
-		}
 	}
 
 	public override void Record () {

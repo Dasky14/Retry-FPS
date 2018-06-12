@@ -5,6 +5,7 @@ public abstract class TimeObject : MonoBehaviour {
 
 	public int rewindCount;
 	public bool isRewinding;
+	public float rewindSpeed = 2;
 	[HideInInspector]
 	public List<TimeInstance> timeInstanceList;
 
@@ -20,14 +21,20 @@ public abstract class TimeObject : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.R))
+		if (Input.GetKeyDown(KeyCode.R)) {
 			StartRewind();
+			Time.timeScale = rewindSpeed;
+		}
 	}
 
 	void FixedUpdate () {
-		if (isRewinding)
+		if (isRewinding) {
 			Rewind();
-		else
+			if (timeInstanceList.Count <= 0) {
+				StopRewind();
+				Time.timeScale = 1;
+			}
+		} else
 			Record();
 	}
 }

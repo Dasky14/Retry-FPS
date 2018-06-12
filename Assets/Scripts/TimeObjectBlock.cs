@@ -27,8 +27,6 @@ public class TimeObjectBlock : TimeObject {
 			rb.velocity = timeInstanceList[0].velocity;
 			timeInstanceList.RemoveAt(0);
 		}
-		if (timeInstanceList.Count <= 0)
-			StopRewind();
 	}
 
 	public override void Record () {
