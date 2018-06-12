@@ -948,6 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewindCount: 0
   isRewinding: 0
+  rewindSpeed: 2
   cameraList: []
 --- !u!114 &114934189062701162
 MonoBehaviour:
@@ -960,7 +961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc2791af80b34d4ea3e8d69869295b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9.3
+  speed: 9
+  runningSpeed: 18
   horizSensitivity: 1
   vertSensitivity: 1
   fallMult: 2

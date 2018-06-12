@@ -72,8 +72,7 @@ public class PlayerMotor : MonoBehaviour {
 		lowJumpMult = _lowJumpMult;
 	}
 
-	Quaternion ClampRotationAroundXAxis(Quaternion q)
-	{
+	Quaternion ClampRotationAroundXAxis(Quaternion q) {
 		q.x /= q.w;
 		q.y /= q.w;
 		q.z /= q.w;

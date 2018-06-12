@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour {
 	private PlayerMotor motor;
 
 	[Range(0.1f, 25f)]
-	public float speed = 6;
+	public float speed = 9;
+	public float runningSpeed = 18;
 	public float horizSensitivity = 1;
 	public float vertSensitivity = 1;
 	public float fallMult = 2f;
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 movHorizontal = transform.right * Input.GetAxisRaw("Horizontal");
 		Vector3 movVertical = transform.forward * Input.GetAxisRaw("Vertical");
 
-		Vector3 velocity = (movHorizontal + movVertical).normalized * speed;
+		Vector3 velocity = (movHorizontal + movVertical).normalized * ((Input.GetKey(KeyCode.LeftShift)) ? runningSpeed : speed);
 		motor.Move(velocity);
 
 		//Player horizontal aiming
